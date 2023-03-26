@@ -11,8 +11,7 @@ public://Podem ser acessados direto no main
     float speed[2];
     void showPos();
     void move(float t);
-    void changeSpeed(float, float);
-
+    void changeSpeed(float, float)
 };
 
 
