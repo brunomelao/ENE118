@@ -12,6 +12,7 @@ public://Podem ser acessados direto no main
     void showPos();
     void move(float t);
     void changeSpeed(float, float)
+    
 };
 
 
