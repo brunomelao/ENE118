@@ -10,6 +10,7 @@ class Banco
 private:
     Conta contas[NUMCONTAS];//Cria um vetor de objetos do tipo Conta que pode armazenar até 100 contas
     int senhaGerente;
+    int numContas;
 public:
     Banco();
     ~Banco();
@@ -18,7 +19,6 @@ public:
     void atendimentoCliente();
     void atendimentoGerente();
     void CadastraConta(int senha, int numero, std::string titular, std::string tipo, double saldo);
-    bool validaSenhaGerente(int senha);
 };
 
 

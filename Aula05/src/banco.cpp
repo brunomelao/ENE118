@@ -1,6 +1,6 @@
 #include "banco.h"
 #include <iostream>
-
+#include <string>
 using namespace std;
 
 Banco::Banco() //O construtor criara 4 contas
@@ -9,6 +9,8 @@ Banco::Banco() //O construtor criara 4 contas
     this->contas[1] = {4567, 2, "Jose", "Poupanca", 800};
     this->contas[2] = {7890, 3, "Maria", "Corrente", 1000};
     this->contas[3] = {8956, 4, "Madalena", "Poupanca", 2000};
+    this->senhaGerente = 4545;
+    this->numContas = 4;
 }
 
 Banco::~Banco()
@@ -109,17 +111,21 @@ void Banco::atendimentoGerente(){
     int senhaGer;
     cout<<"Digite a senha:";
     cin>>senhaGer;
-    if(this->validaSenhaGerente(senhaGer)){
-
+    if(this->senhaGerente == senhaGer){
+        int senha,numero;
+        string titular,tipo;
+        double saldo;
+        cout<<"Digite a senha, numero, titular, tipo e saldo da conta que deseja cadastrar: ";
+        cin>>senha>>numero>>titular>>tipo>>saldo;
+        this->CadastraConta(senha,numero,titular,tipo,saldo);
     }
     else{
         cout<<"Senha invalida"<<std::endl;
-        return false;
     }
 }
-bool Banco::validaSenhaGerente(int senha){
-    return (this->senhaGerente == senha);
-}
-void Banco::CadastraConta(int senha, int numero, std::string titular, std::string tipo, double saldo){
-    Conta novo
+
+void Banco::CadastraConta(int senha, int numero, std::string titular, std::string tipo, double saldo){  
+    this->contas[this->numContas] = {senha, numero, titular, tipo, saldo};
+    cout<<"Conta cadastrada com sucesso"<<endl;
+    this->numContas++;
 }
