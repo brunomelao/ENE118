@@ -19,7 +19,7 @@ Banco::~Banco()
 
 Conta *Banco::buscaConta(int numero)//Retorna o endereço da conta que possuir o mesmo numero informado
 {
-    for (int i = 0; i < NUMCONTAS; i++)
+    for (int i = 0; i < this->numContas; i++)
     {
         if (numero == this->contas[i].numero)
         {
@@ -31,17 +31,24 @@ Conta *Banco::buscaConta(int numero)//Retorna o endereço da conta que possuir o
 }
 void Banco::atendimento(){
     int pessoa;
+    bool saida=false;
+    while(!saida){
     cout << "Bem vindo ao sistema de atendimento do banco" << endl;
-    cout <<"Voce e um cliente ou gerente (0-cliente, 1-gerente)"<<endl;
+    cout <<"Voce e um cliente ou gerente (0 - cliente, 1 - gerente, 2 - Sair)"<<endl;
     cin>> pessoa;
     switch(pessoa){
-        case 0: atendimentoCliente();
+        case 0: saida=this->atendimentoCliente();
         break;
-        case 1: atendimentoGerente();
+        case 1: saida=this->atendimentoGerente();
         break;
+        case 2:
+            saida=true;
+            break;
     }
+    }
+
 }
-void Banco::atendimentoCliente() //Realiza o atendimento ao cliente(Função chamada na main)
+bool Banco::atendimentoCliente() //Realiza o atendimento ao cliente(Função chamada na main)
 {
     Conta *contaCliente;
     Conta *contaTransfer;
@@ -93,7 +100,12 @@ void Banco::atendimentoCliente() //Realiza o atendimento ao cliente(Função cha
                     cin>>valor;
                     cin>>numContaTransferir;
                     contaTransfer = this->buscaConta(numContaTransferir);
-                    contaCliente->transferir(valor,senhain,contaTransfer);
+                    if(contaTransfer==nullptr){
+                        cout<<"Conta Invalida"<<endl;
+                    }
+                    else{
+                        contaCliente->transferir(valor,senhain,contaTransfer);
+                    }
                     break;
                 case 5:
                     atendimento = false;
@@ -106,22 +118,38 @@ void Banco::atendimentoCliente() //Realiza o atendimento ao cliente(Função cha
             cout << "Senha invalida" << endl;
         }
     }
+    return atendimento;
 }
-void Banco::atendimentoGerente(){
+bool Banco::atendimentoGerente(){
     int senhaGer;
+    bool atendimento=true;
+    int senha;
+    string titular,tipo;
+    double saldo;
     cout<<"Digite a senha:";
     cin>>senhaGer;
     if(this->senhaGerente == senhaGer){
-        int senha,numero;
-        string titular,tipo;
-        double saldo;
-        cout<<"Digite a senha, numero, titular, tipo e saldo da conta que deseja cadastrar: ";
-        cin>>senha>>numero>>titular>>tipo>>saldo;
-        this->CadastraConta(senha,numero,titular,tipo,saldo);
+        int op;
+        cout<<"Qual operacao deseja fazer? (1 - Cadastrar conta, 2 - Sair): ";
+        cin>>op;
+        switch(op){
+            case 1:
+                
+                cout<<"Digite a senha, titular, tipo e saldo da conta que deseja cadastrar: ";
+                cin>>senha>>titular>>tipo>>saldo;
+                 this->CadastraConta(senha,this->numContas+1,titular,tipo,saldo);
+                 atendimento=false;
+            break;
+
+            case 2: atendimento=false;
+            break;
+        }
+        
     }
     else{
         cout<<"Senha invalida"<<std::endl;
     }
+    return atendimento;
 }
 
 void Banco::CadastraConta(int senha, int numero, std::string titular, std::string tipo, double saldo){  
