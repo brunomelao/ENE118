@@ -19,6 +19,7 @@ public:
     bool atendimentoCliente();
     bool atendimentoGerente();
     void CadastraConta(int senha, int numero, std::string titular, std::string tipo, double saldo);
+    
 };
 
 

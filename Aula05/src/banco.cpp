@@ -54,6 +54,7 @@ bool Banco::atendimentoCliente() //Realiza o atendimento ao cliente(Função cha
     Conta *contaTransfer;
     int numC = 0;
     int senhain;
+    int senha=0;
     bool atendimento = true;
     int numContaTransferir;
 
@@ -73,7 +74,7 @@ bool Banco::atendimentoCliente() //Realiza o atendimento ao cliente(Função cha
 
         if (contaCliente->validaSenha(senhain))
         {
-            cout << "Ola " << contaCliente->titular << endl;
+            cout << "Ola " << contaCliente->titular <<","<< endl;
             while (atendimento) //Realiza o atendimento
             {
                 int op;
@@ -93,10 +94,11 @@ bool Banco::atendimentoCliente() //Realiza o atendimento ao cliente(Função cha
                     contaCliente->deposito(valor);
                     break;
                 case 3:
-                    cout << "Saldo: R$ "<<contaCliente->getSaldo(senhain)<<endl;
+                    cout << "Saldo: R$"<<contaCliente->getSaldo(senhain)<<endl;
                     break;
+
                 case 4:
-                    cout << "Digite o valor da transferencia e o numero da conta que quer transferir: ";
+                    cout << "Digite o valor da transferencia e o numero da conta que quer transferir:";
                     cin>>valor;
                     cin>>numContaTransferir;
                     contaTransfer = this->buscaConta(numContaTransferir);
