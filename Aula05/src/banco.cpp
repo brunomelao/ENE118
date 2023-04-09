@@ -117,7 +117,7 @@ bool Banco::atendimentoCliente() //Realiza o atendimento ao cliente(Função cha
         }
         else
         {
-            cout << "Senha invalida" << endl;
+            cout << "Senha invalida." << endl;
         }
     }
     return atendimento;
@@ -156,6 +156,6 @@ bool Banco::atendimentoGerente(){
 
 void Banco::CadastraConta(int senha, int numero, std::string titular, std::string tipo, double saldo){  
     this->contas[this->numContas] = {senha, numero, titular, tipo, saldo};
-    cout<<"Conta cadastrada com sucesso"<<endl;
+    cout<<"Conta cadastrada com sucesso."<<endl;
     this->numContas++;
 }

@@ -68,7 +68,7 @@ void Conta::deposito(double valor)
     }
     else
     {
-        std::cout<<"Valor invalido"<<std::endl;
+        std::cout<<"Valor invalido!"<<std::endl;
     }
     
 }

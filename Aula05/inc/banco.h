@@ -4,7 +4,6 @@
 #include "conta.h"
 
 #define NUMCONTAS 100 //Define que a palavar NUMCONTAS passa a valer como escrever 100
-
 class Banco
 {
 private:
