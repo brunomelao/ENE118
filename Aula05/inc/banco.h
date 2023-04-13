@@ -2,12 +2,12 @@
 #define BANCO_H
 
 #include "conta.h"
-
+// Adiciona Conta =  Cria um vetor dinamico maior copia dado anterior, deleta o antigo e adiciona o novo 
 #define NUMCONTAS 100 //Define que a palavar NUMCONTAS passa a valer como escrever 100
 class Banco
 {
 private:
-    Conta contas[NUMCONTAS];//Cria um vetor de objetos do tipo Conta que pode armazenar até 100 contas
+    Conta* contas;
     int senhaGerente;
     int numContas;
 public:
@@ -17,7 +17,8 @@ public:
     void atendimento();
     bool atendimentoCliente();
     bool atendimentoGerente();
-    void CadastraConta(int senha, int numero, std::string titular, std::string tipo, double saldo);
+    void cadastraConta(int senha, int numero, std::string titular, std::string tipo, double saldo);
+    void removeConta(int numero);
     
 };
 

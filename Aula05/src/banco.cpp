@@ -4,13 +4,19 @@
 using namespace std;
 
 Banco::Banco() //O construtor criara 4 contas
-{
+{   /*
     this->contas[0] = Conta(1234, 1, "Joao", "Corrente", 300);
     this->contas[1] = {4567, 2, "Jose", "Poupanca", 800};
     this->contas[2] = {7890, 3, "Maria", "Corrente", 1000};
     this->contas[3] = {8956, 4, "Madalena", "Poupanca", 2000};
+    */
     this->senhaGerente = 4545;
-    this->numContas = 4;
+    this->numContas = 0;
+    cadastraConta(1234, 1, "Joao", "Corrente", 300);
+    cadastraConta(4567, 2, "Jose", "Poupanca", 800);
+    cadastraConta(7890, 3, "Maria", "Corrente", 1000);
+    cadastraConta(8956, 4, "Madalena", "Poupanca", 2000);
+
 }
 
 Banco::~Banco()
@@ -66,6 +72,7 @@ bool Banco::atendimentoCliente() //Realiza o atendimento ao cliente(Função cha
     if (contaCliente == nullptr)//Se não achar nenhuma conta que corresponda entra nesse if
     {
         cout << "Conta invalida" << endl;
+        return false;
     }
     else
     {
@@ -128,22 +135,34 @@ bool Banco::atendimentoGerente(){
     int senha;
     string titular,tipo;
     double saldo;
+    int contaRemove;
     cout<<"Digite a senha:";
     cin>>senhaGer;
     if(this->senhaGerente == senhaGer){
         int op;
-        cout<<"Qual operacao deseja fazer? (1 - Cadastrar conta, 2 - Sair): ";
+        cout<<"Qual operacao deseja fazer? (1 - Cadastrar conta, 2 - Remover conta, 3 - Sair): ";
         cin>>op;
         switch(op){
             case 1:
                 
                 cout<<"Digite a senha, titular, tipo e saldo da conta que deseja cadastrar: ";
                 cin>>senha>>titular>>tipo>>saldo;
-                 this->CadastraConta(senha,this->numContas+1,titular,tipo,saldo);
+                 this->cadastraConta(senha,this->numContas+1,titular,tipo,saldo);
                  atendimento=false;
             break;
-
-            case 2: atendimento=false;
+            case 2: 
+                cout<<"Digite o numero da conta que deseja remover:";
+                cin>>contaRemove;
+                if(buscaConta(contaRemove)==nullptr){
+                    cout<<"Conta Invalida"<<endl;
+                    atendimento=false;
+                }
+                else{
+                    removeConta(contaRemove);
+                    atendimento=false;
+                }
+            break;
+            case 3: atendimento=false;
             break;
         }
         
@@ -154,8 +173,29 @@ bool Banco::atendimentoGerente(){
     return atendimento;
 }
 
-void Banco::CadastraConta(int senha, int numero, std::string titular, std::string tipo, double saldo){  
-    this->contas[this->numContas] = {senha, numero, titular, tipo, saldo};
-    cout<<"Conta cadastrada com sucesso."<<endl;
+void Banco::cadastraConta(int senha, int numero, std::string titular, std::string tipo, double saldo){  
+    Conta *novaConta= new Conta[(this->numContas)+1];
+    int i;
+    for(i=0;i<this->numContas;i++){
+        novaConta[i]=this->contas[i];
+    }
+    novaConta[i]={senha,numero,titular,tipo, saldo};
+    if(numContas>0){
+        delete [] contas;
+    }
     this->numContas++;
+    this->contas= novaConta;
+}
+
+void Banco::removeConta(int numero){
+    Conta *contaRemovida = new Conta[this->numContas-1];
+    int cont=0;
+    for(int i=0;i<this->numContas ;i++){
+        if(i==(numero-1))continue;
+        contaRemovida[cont]=this->contas[i];
+        cont++;
+    }
+    delete [] contas;
+    this->numContas--;
+    this->contas=contaRemovida;
 }
