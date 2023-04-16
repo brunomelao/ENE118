@@ -20,8 +20,8 @@ public:
     //Funções set
     void setId(const string&);
     void setUnidade(const string&);
-    void lerDados(const Medicao*, const int&);
-    void limpaDados();
+    virtual void lerDados(const Medicao*, const int&);
+    virtual void limpaDados();
 
     //Funções get
     string getId();
@@ -29,7 +29,7 @@ public:
     int getNumMed();
     int getDados(Medicao*);
     bool getDado(const string&, Medicao&);
-    void imprimeDados();
+    virtual void imprimeDados()=0;
 };
 
 #endif

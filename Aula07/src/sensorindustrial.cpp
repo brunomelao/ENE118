@@ -83,11 +83,11 @@ bool SensorIndustrial::getDado(const string& h, Medicao& med)
    
 }
 
-void SensorIndustrial::imprimeDados()
-{
-    cout<<"Dados do sensor "<<this->getId()<<":"<<endl;
-    for(int i=0; i<this->numMed; i++)
-    {
-        cout<<"Horario: "<<this->dados[i].horario<<"h | Valor: "<<this->dados[i].valor<<endl;
-    }
-}
+// void SensorIndustrial::imprimeDados()
+// {
+//     cout<<"Dados do sensor "<<this->getId()<<":"<<endl;
+//     for(int i=0; i<this->numMed; i++)
+//     {
+//         cout<<"Horario: "<<this->dados[i].horario<<"h | Valor: "<<this->dados[i].valor<<endl;
+//     }
+// }
