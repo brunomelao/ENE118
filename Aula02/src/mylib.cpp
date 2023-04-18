@@ -7,14 +7,14 @@ float potencia(float b, int exp)
 	}
 	return r;
 }
-float fatorial(float num) //Função potencia que recebe a base e o exponencial para a operação
+float fatorial(float num) 
 {
 	float fat=1;
 
 	for(int cont=1;cont<num;cont++){
 		fat=fat*(cont+1);
 	}
-	return fat; //retorna o valor da operação potencia
+	return fat;
 }
 float y(float x){
 	float val;
