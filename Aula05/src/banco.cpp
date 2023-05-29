@@ -2,11 +2,13 @@
 #include <iostream>
 #include <string>
 using namespace std;
+// Adicionar conta depois que remove uma conta está com erro
 
 Banco::Banco()
 {   
     this->senhaGerente = 4545;
     this->numContas = 0;
+    this->numContasGlobal=0;
     cadastraConta(1234, 1, "Joao", "Corrente", 300);
     cadastraConta(4567, 2, "Jose", "Poupanca", 800);
     cadastraConta(7890, 3, "Maria", "Corrente", 1000);
@@ -16,6 +18,7 @@ Banco::Banco()
 
 Banco::~Banco()
 {
+    delete[] this->contas;
 }
 
 Conta *Banco::buscaConta(int numero)
@@ -141,7 +144,7 @@ bool Banco::atendimentoGerente(){
                 
                 cout<<"Digite a senha, titular, tipo e saldo da conta que deseja cadastrar: ";
                 cin>>senha>>titular>>tipo>>saldo;
-                 this->cadastraConta(senha,this->numContas+1,titular,tipo,saldo);
+                 this->cadastraConta(senha,this->numContasGlobal+1,titular,tipo,saldo);
                  atendimento=false;
             break;
             case 2: 
@@ -178,7 +181,9 @@ void Banco::cadastraConta(int senha, int numero, std::string titular, std::strin
         delete [] contas;
     }
     this->numContas++;
+    this->numContasGlobal++;
     this->contas= novaConta;
+    cout<<"adicionou, numcontas:"<<this->numContas<<endl;
 }
 
 void Banco::removeConta(int numero){
@@ -192,4 +197,6 @@ void Banco::removeConta(int numero){
     delete [] contas;
     this->numContas--;
     this->contas=contaRemovida;
+    cout<<"removeu, numcontas:"<<this->numContas<<endl;
+
 }

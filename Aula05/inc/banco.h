@@ -9,6 +9,7 @@ private:
     Conta* contas;
     int senhaGerente;
     int numContas;
+    int numContasGlobal;
 public:
     Banco();
     ~Banco();
