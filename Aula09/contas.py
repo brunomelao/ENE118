@@ -72,6 +72,13 @@ class Conta():
             print(f"Saldo: {self._saldo}")
         else:
             print("Senha inválida")
+    def validaSenha(self,senha):
+        """
+        Método para validação da senha
+        :param senha: senha da conta
+        """
+        return senha==self.__senha
+
 class ContaPoupanca(Conta):
     """
     Classe ContaPoupanca
