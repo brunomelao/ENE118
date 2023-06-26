@@ -2,6 +2,8 @@ from pyModbusTCP.client import ModbusClient
 from time import sleep
 from pymodbus.payload import BinaryPayloadDecoder
 from pymodbus.payload import BinaryPayloadBuilder
+from pymodbus.constants import Endian
+
 class ClienteMODBUS():
     """
     Classe Cliente MODBUS
@@ -100,7 +102,7 @@ class ClienteMODBUS():
         Método para a leitura de um "float" na tabela MODBUS
         """
         result = self._cliente.read_holding_registers(addr,2)
-        decoder = BinaryPayloadDecoder.fromRegisters(result)
+        decoder = BinaryPayloadDecoder.fromRegisters(result, byteorder=Endian.Big, wordorder=Endian.Little)
         decoded = decoder.decode_32bit_float()
         return decoded
     

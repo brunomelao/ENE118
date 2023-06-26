@@ -2,6 +2,7 @@ import kivy
 from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
 from kivy.config import Config
+from kivy.core.window import Window
 
 class MyWidget(BoxLayout):
     op = ''

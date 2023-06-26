@@ -1,8 +1,5 @@
 from contas import Conta, ContaPoupanca
 class Banco():
-    """
-    Classe para representação de um banco
-    """
     def __init__(self):
         self.__contasBanco=[]
         self.__numeroContas=0
@@ -13,10 +10,6 @@ class Banco():
         self.cadastraConta( 3, "Maria", 7890,"Corrente", 1000)
         self.cadastraConta(4, "Madalena",8956,  "Poupanca", 2000)
     def cadastraConta(self, numero,titular,senha,tipo,saldoi):
-        """
-        Método para adição de uma conta ao banco
-        :param Conta: objeto da classe Conta
-        """
         for conta in self.__contasBanco:
             if conta.numero==numero:
                 print("Conta ja existente")
@@ -30,10 +23,6 @@ class Banco():
         self.__contasBanco.append(novaConta)
         print("Conta cadastrada com sucesso")
     def removeConta(self, numero):
-        """
-        Método para remoção de uma conta do banco
-        :param numero: número da conta
-        """
         for conta in self.__contasBanco:
             if conta.numero==numero:
                 self.__contasBanco.remove(conta)
@@ -43,13 +32,6 @@ class Banco():
                     self.__numeroContas-=1
                 break
     def transfere(self, senha, numCdest, valor,numCAtual):
-        """
-        Método para transferência entre contas
-        :param senha: senha da conta
-        :param numCdest: número da conta destino
-        :param valor: valor da transferência
-        """
-        
         for conta in self.__contasBanco:
             if conta.numero==numCAtual:
                 conta.saque(senha,valor)
@@ -57,9 +39,6 @@ class Banco():
                 conta.deposito(valor)
                 break
     def atendimento(self):
-        """
-        Método para atendimento ao cliente
-        """
         print("Bem-vindo ao sistema de atendimento do banco")
         opcao=input("Voce e um cliente ou gerente (0 - Cliente, 1 - gerente, 2 - Sair):")
         while(opcao!="2"):
@@ -144,10 +123,6 @@ class Banco():
         else:
             print("Senha invalida")
     def mudaSenhaGer(self, senha):
-        """
-        Método para mudança da senha do gerente
-        :param senha: senha atual
-        """
         self.__senhaGerente=senha
     
     
